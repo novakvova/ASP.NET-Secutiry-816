@@ -80,6 +80,9 @@ namespace WebTestSecirity.Models
         [Display(Name = "Стать")]
         public Gender Gender { get; set; }
 
+        [Display(Name = "Телефон")]
+        public string Telephone { get; set; }
+
         [Display(Name = "Хобі")]
         public string Hobby { get; set; }
 
