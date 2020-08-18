@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using WebTestSecirity.Entities;
 using WebTestSecirity.Models;
 
 namespace WebTestSecirity.Controllers
@@ -151,7 +152,21 @@ namespace WebTestSecirity.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                UserProfile userProfile = new UserProfile()
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Patronymic = model.Patronymic,
+                    Gender = Gender.Female,
+                    Hobby = model.Hobby
+                };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    PhoneNumber = model.Telephone,
+                    UserProfile = userProfile
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

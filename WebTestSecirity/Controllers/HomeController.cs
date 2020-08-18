@@ -41,7 +41,8 @@ namespace WebTestSecirity.Controllers
                 .Select(u=>new UserVM 
                 {
                     Id=u.Id,
-                    Email=u.Email
+                    Email=u.Email,
+                    FirstName = u.UserProfile.FirstName
                 }).ToList();
 
             return View(list);
