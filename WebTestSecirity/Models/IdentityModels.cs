@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using WebTestSecirity.Entities;
 
 namespace WebTestSecirity.Models
 {
@@ -16,6 +17,8 @@ namespace WebTestSecirity.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public virtual UserProfile UserProfile { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -29,5 +32,7 @@ namespace WebTestSecirity.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<UserProfile> UserProfiles { get; set; }
     }
 }

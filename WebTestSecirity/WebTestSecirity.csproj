@@ -179,12 +179,18 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Entities\Enums.cs" />
+    <Compile Include="Entities\UserProfile.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202008170643466_Add asp.net mvc Identity.cs" />
     <Compile Include="Migrations\202008170643466_Add asp.net mvc Identity.Designer.cs">
       <DependentUpon>202008170643466_Add asp.net mvc Identity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008180634493_Add tblUserProfiles.cs" />
+    <Compile Include="Migrations\202008180634493_Add tblUserProfiles.Designer.cs">
+      <DependentUpon>202008180634493_Add tblUserProfiles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -270,6 +276,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202008170643466_Add asp.net mvc Identity.resx">
       <DependentUpon>202008170643466_Add asp.net mvc Identity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008180634493_Add tblUserProfiles.resx">
+      <DependentUpon>202008180634493_Add tblUserProfiles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
