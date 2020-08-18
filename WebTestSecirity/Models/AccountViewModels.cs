@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using WebTestSecirity.Entities;
 
 namespace WebTestSecirity.Models
 {
@@ -64,6 +65,25 @@ namespace WebTestSecirity.Models
 
     public class RegisterViewModel
     {
+        [Display(Name = "Прізвище")]
+        [Required]
+        public string LastName { get; set; }
+
+        [Display(Name = "Ім'я")]
+        [Required]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Побатькові")]
+        [Required]
+        public string Patronymic { get; set; }
+
+        [Display(Name = "Стать")]
+        public Gender Gender { get; set; }
+
+        [Display(Name = "Хобі")]
+        public string Hobby { get; set; }
+
+
         [Required]
         [EmailAddress]
         [Display(Name = "Електронна пошта")]
