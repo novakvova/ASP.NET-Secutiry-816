@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -18,8 +21,34 @@ namespace WebTestSecirity
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            try
+            {
+                string HostAddress = ConfigurationManager.AppSettings["Host"].ToString();
+                string FormEmailId = ConfigurationManager.AppSettings["MailFrom"].ToString();
+                string Password = ConfigurationManager.AppSettings["Password"].ToString();
+                string Port = ConfigurationManager.AppSettings["Port"].ToString();
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.From = new MailAddress(FormEmailId);
+                mailMessage.Subject = message.Subject;
+                mailMessage.Body = message.Body;
+                mailMessage.IsBodyHtml = true;
+                mailMessage.To.Add(new MailAddress(message.Destination));
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = HostAddress;
+                smtp.EnableSsl = true;
+                NetworkCredential networkCredential = new NetworkCredential();
+                networkCredential.UserName = mailMessage.From.Address;
+                networkCredential.Password = Password;
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = networkCredential;
+                smtp.Port = Convert.ToInt32(Port);
+                smtp.Send(mailMessage);
+                return Task.FromResult(0);
+            }
+            catch (Exception e)
+            {
+                return Task.FromResult(1);
+            }
         }
     }
 
