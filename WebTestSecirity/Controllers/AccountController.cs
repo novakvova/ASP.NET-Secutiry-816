@@ -194,7 +194,7 @@ namespace WebTestSecirity.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                   // await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -202,7 +202,7 @@ namespace WebTestSecirity.Controllers
                      var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                      await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("ThankRegister", "Account");
                 }
                 AddErrors(result);
             }
@@ -220,8 +220,11 @@ namespace WebTestSecirity.Controllers
             {
                 return View("Error");
             }
+
+            ApplicationUser u = UserManager.FindById(userId);
+
             var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            return View(result.Succeeded ? "ConfirmEmail" : "Error", u);
         }
 
         //
@@ -266,6 +269,12 @@ namespace WebTestSecirity.Controllers
         public ActionResult ForgotPasswordConfirmation()
         {
             return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult ThankRegister()
+        {
+            return View("ThankRegister");
         }
 
         //
